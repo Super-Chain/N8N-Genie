@@ -54,6 +54,9 @@ OLLAMA_HOST=https://your_ollama_host"  # Optional: Add Ollama host if not local.
 PORT=8001  # Optional, defaults to 8001
 ```
 
+**Step 3: Start the API Server** 
+`uvicorn app:app --host 0.0.0.0 --port 1234`
+
 ## N8N Installation (Local Host)
 ### Build from n8n Repository
 
