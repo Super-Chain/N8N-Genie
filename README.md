@@ -38,17 +38,9 @@ OPENAI_API_KEY=your_openai_api_key        # Required for embeddings and OpenAI m
 # Optional API Keys
 OPENROUTER_API_KEY=your_openrouter_api_key  # Required only if using OpenRouter models
 
-# AWS Bedrock Configuration
-AWS_ACCESS_KEY_ID=your_aws_access_key_id      # Required for AWS Bedrock models
-AWS_SECRET_ACCESS_KEY=your_aws_secret_key     # Required for AWS Bedrock models
-AWS_REGION=us-east-1                          # Optional, defaults to us-east-1
-AWS_ROLE_ARN=your_aws_role_arn                # Optional, for role-based authentication
-
 # OpenAI API Configuration
 OPENAI_BASE_URL=https://custom-api-endpoint.com/v1  # Optional, for custom OpenAI API endpoints
 
-# Server Configuration
-PORT=8001  # Optional, defaults to 8001
 ```
 
 **Step 3: Start the API Server** 
