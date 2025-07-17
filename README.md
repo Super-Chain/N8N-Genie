@@ -108,6 +108,8 @@ Once you have the N8N Genie plugin installed and running, you can leverage its p
 3. **Activate the Genie** - Click on the sidebar to open the assistant panel
 
 ### Basic Usage
+You can use NotebookLM or other AI Chatbot to generate the prompt :
+[Demo](https://www.linkedin.com/feed/update/urn:li:activity:7339230068948221952/)
 
 #### 1. Workflow Generation
 - **Click 'Create Workflow' button**: Redirect to the new page where you can start building your automation from scratch
