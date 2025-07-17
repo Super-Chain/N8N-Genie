@@ -1,6 +1,11 @@
 # N8N-Genie
 An AI-powered plugin for n8n that enhances workflow automation with intelligent code generation, repository analysis, and conversational assistance capabilities.
 
+## Demo
+https://github.com/user-attachments/assets/95540bb3-47f5-4ad5-b6ff-70a1f2de9a7d
+
+
+
 ## Features
 ### 1. AI-Powered Workflow Creation
 - **Natural Language to n8n Workflow**: Transform user descriptions into complete n8n workflow JSON configurations
@@ -13,15 +18,16 @@ An AI-powered plugin for n8n that enhances workflow automation with intelligent 
 - **Preserve Workflow Integrity**: Maintains existing workflow structure while applying requested changes
 
 ## Install 
-** Step 1: Git Clone & Install Python Packages **
+**Step 1: Git Clone & Install Python Packages**
 ```
 git clone https://github.com/Super-Chain/N8N-Genie.git
 cd N8N-Genie
 pip install -r requirements.txt
 ```
 
-** Step 2: Set Up Environment Variables **
-We are using Open DeepWiki API (https://github.com/AsyncFuncAI/deepwiki-open/tree/main/api) `/api` folder
+**Step 2: Set Up Environment Variables**
+
+We are using [Open DeepWiki API](https://github.com/AsyncFuncAI/deepwiki-open/tree/main/api) `/api` folder
 
 Create a .env file in the project root:
 ```
@@ -48,10 +54,10 @@ OLLAMA_HOST=https://your_ollama_host"  # Optional: Add Ollama host if not local.
 PORT=8001  # Optional, defaults to 8001
 ```
 
-## If you havent got N8N (localhost) 
+## N8N Installation (Local Host)
 ### Build from n8n Repository
 
-1. **Clone the official n8n repository**
+1. **Clone the official n8n repository** (If you have install your N8N locally, you can skip this step)
    ```bash
    git clone https://github.com/n8n-io/n8n.git
    cd n8n
