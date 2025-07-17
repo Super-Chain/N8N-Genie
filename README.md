@@ -47,9 +47,6 @@ AWS_ROLE_ARN=your_aws_role_arn                # Optional, for role-based authent
 # OpenAI API Configuration
 OPENAI_BASE_URL=https://custom-api-endpoint.com/v1  # Optional, for custom OpenAI API endpoints
 
-# Ollama host
-OLLAMA_HOST=https://your_ollama_host"  # Optional: Add Ollama host if not local. default: http://localhost:11434
-
 # Server Configuration
 PORT=8001  # Optional, defaults to 8001
 ```
