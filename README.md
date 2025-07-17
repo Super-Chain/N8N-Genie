@@ -71,8 +71,8 @@ PORT=8001  # Optional, defaults to 8001
    - `apply_plugin.js` - Plugin injection script for the n8n interface
    
    ```bash
-   cp plugin.js docker/images/n8n/
-   cp apply_plugin.js docker/images/n8n/
+   cp ~/N8N-Genie/n8n-genie-js/plugin.js docker/images/n8n/
+   cp ~/N8N-Genie/n8n-genie-js/apply_plugin.js docker/images/n8n/
    ```
 
 3. **Modify the Dockerfile**
@@ -83,10 +83,10 @@ PORT=8001  # Optional, defaults to 8001
    WORKDIR /home/node
    COPY --from=builder /compiled /usr/local/lib/node_modules/n8n
 
-   COPY docker/images/n8n-genie-js/plugin.js /usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/dist/assets/plugin.js
-   COPY docker/images/n8n-genie-js/apply_plugin.js .
+   COPY docker/images/n8n/plugin.js /usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/dist/assets/plugin.js
+   COPY docker/images/n8n/apply_plugin.js .
    RUN node apply_plugin.js
-
+   
    COPY docker/images/n8n/docker-entrypoint.sh /
    ```
 
