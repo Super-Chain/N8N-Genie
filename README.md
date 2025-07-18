@@ -47,10 +47,19 @@ OPENAI_BASE_URL=https://custom-api-endpoint.com/v1  # Optional, for custom OpenA
 
 `uvicorn app:app --host 0.0.0.0 --port 1234`
 
-## N8N Installation (Local Host)
-### Build from n8n Repository
+## N8N Installation
 
-1. **Clone the official n8n repository** (If you have install your N8N locally, you can skip this step)
+> ⚠️ **IMPORTANT WARNING**: Before proceeding with any installation method, **BACKUP YOUR EXISTING N8N DATA** to prevent any potential data loss during the plugin installation process. This includes workflows, credentials, and any custom configurations.
+
+> 📋 **Docker Volume Reminder**: If you're using Docker for n8n, ensure you have proper volume mounts configured to persist your data. Example: `-v ~/.n8n:/home/node/.n8n` to maintain your workflows and settings across container restarts.
+
+### Option 1: Fresh Installation (Local Host Fresh install)
+
+Use this method if you're setting up n8n for the first time or want a clean installation with the N8N Genie plugin.
+
+#### Build from n8n Repository
+
+1. **Clone the official n8n repository**
    ```bash
    git clone https://github.com/n8n-io/n8n.git
    cd n8n
@@ -90,9 +99,77 @@ OPENAI_BASE_URL=https://custom-api-endpoint.com/v1  # Optional, for custom OpenA
 
 5. **Run the enhanced n8n instance**
    ```bash
-   docker run -it --rm -p 5678:5678 n8n-genie
+   docker run -it --rm -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8n-genie
+   ```
+### Option 2: Existing N8N Instance Modification
+
+Use this method if you already have a running n8n instance and want to add the N8N Genie plugin functionality.
+
+> ⚠️ **CRITICAL**: This modification involves changes to your existing n8n installation. **BACKUP ALL YOUR DATA** before proceeding. Stop your current n8n instance and export all workflows as a precautionary measure.
+
+#### For Docker-based Existing Installations
+
+1. **Stop your current n8n container**
+   ```bash
+   docker stop your-n8n-container-name
    ```
 
+2. **Backup your n8n data**
+   ```bash
+   # If using volume mounts
+   cp -r ~/.n8n ~/.n8n-backup-$(date +%Y%m%d)
+   
+   # If using named volumes, backup with:
+   docker run --rm -v your-n8n-volume:/source -v $(pwd):/backup alpine tar czf /backup/n8n-backup-$(date +%Y%m%d).tar.gz -C /source .
+   ```
+
+3. **Identify your current n8n container image and version**
+   ```bash
+   docker inspect your-n8n-container-name | grep Image
+   ```
+
+4. **Create a new Dockerfile for modification**
+   ```dockerfile
+   # Use your existing n8n image as base
+   FROM n8nio/n8n:latest  # Replace with your current version
+   
+   USER root
+   
+   # Copy the N8N Genie plugin files
+   COPY plugin.js /usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/dist/assets/
+   COPY apply_plugin.js /tmp/
+   
+   # Apply the plugin modifications
+   RUN cd /tmp && node apply_plugin.js
+   
+   USER node
+   ```
+
+5. **Build the modified image**
+   ```bash
+   # Copy plugin files to current directory first
+   cp ~/N8N-Genie/n8n-genie-js/plugin.js .
+   cp ~/N8N-Genie/n8n-genie-js/apply_plugin.js .
+   
+   # Build the modified image
+   docker build -t n8n-with-genie .
+   ```
+
+6. **Run the modified n8n instance with data persistence**
+   ```bash
+   # Using volume mount (recommended)
+   docker run -d --name n8n-genie \
+     -p 5678:5678 \
+     -v ~/.n8n:/home/node/.n8n \
+     n8n-with-genie
+   
+   # Or using named volume
+   docker run -d --name n8n-genie \
+     -p 5678:5678 \
+     -v n8n_data:/home/node/.n8n \
+     n8n-with-genie
+   ```
+   
 ### Finish
 
 The plugin will be available in your n8n interface with enhanced AI capabilities for workflow automation and code generation.
