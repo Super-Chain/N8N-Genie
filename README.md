@@ -169,7 +169,21 @@ Use this method if you already have a running n8n instance and want to add the N
      -v n8n_data:/home/node/.n8n \
      n8n-with-genie
    ```
-   
+### Verification and Rollback
+
+After installation, verify the plugin is working correctly:
+
+1. **Access your n8n interface** at `http://localhost:5678`
+2. **Look for the N8N Genie panel** in the sidebar
+3. **Test basic functionality** by trying to create a simple workflow
+
+**If something goes wrong:**
+```bash
+# For Docker installations
+docker stop n8n-genie
+docker run -d --name n8n-original -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n:latest
+```
+
 ### Finish
 
 The plugin will be available in your n8n interface with enhanced AI capabilities for workflow automation and code generation.
