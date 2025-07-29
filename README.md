@@ -250,3 +250,7 @@ Connect Follow-up Delay to Personalize Email Content
 Modify the existing workflow by replaing the AI model from openAI to gemini
 ```
 - **Review**: The N8N Genie will generate a separate workflow. Cick the button "Copy Button" to copy the workflow JSON, then paste it on the n8n canvas to import and use the created workflow
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Super-Chain/N8N-Genie&type=Date)](https://www.star-history.com/#Super-Chain/N8N-Genie&Date)
