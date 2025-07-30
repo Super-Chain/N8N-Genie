@@ -176,13 +176,13 @@ Use this method if you already have a running n8n instance and want to add the N
    docker run -d --name n8n-genie \
      -p 5678:5678 \
      -v ~/.n8n:/home/node/.n8n \
-     n8n-with-genie
+     n8n-genie
    
    # Or using named volume
    docker run -d --name n8n-genie \
      -p 5678:5678 \
      -v n8n_data:/home/node/.n8n \
-     n8n-with-genie
+     n8n-genie
    ```
 ### Verification and Rollback
 
