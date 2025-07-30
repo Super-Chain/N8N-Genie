@@ -58,8 +58,10 @@ docker build -t n8n-genie .
 docker run -d \
   --name n8n-genie-app \
   -p 1234:1234 \
+  --env-file .env \
   n8n-genie
 ```
+
 ## N8N Installation
 
 > ⚠️ **IMPORTANT WARNING**: Before proceeding with any installation method, **BACKUP YOUR EXISTING N8N DATA** to prevent any potential data loss during the plugin installation process. This includes workflows, credentials, and any custom configurations.
