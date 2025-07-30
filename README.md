@@ -167,7 +167,7 @@ Use this method if you already have a running n8n instance and want to add the N
    cp ~/N8N-Genie/n8n-genie-js/apply_plugin.js .
    
    # Build the modified image
-   docker build -t n8n-with-genie .
+   docker build -t n8n-genie .
    ```
 
 6. **Run the modified n8n instance with data persistence**
