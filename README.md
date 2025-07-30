@@ -113,7 +113,7 @@ Use this method if you're setting up n8n for the first time or want a clean inst
     RUN node apply_plugin.js
     
     # Change port to 5678 (optional)
-    ENV N8N_PORT=5679=8
+    ENV N8N_PORT=5678
     EXPOSE 5678
     
     # Switch back to node user
