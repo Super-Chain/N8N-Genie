@@ -45,8 +45,21 @@ OPENAI_BASE_URL=https://custom-api-endpoint.com/v1  # Optional, for custom OpenA
 
 **Step 3: Start the API Server** 
 
+Using bash 
+
 `uvicorn app:app --host 0.0.0.0 --port 1234`
 
+Using Docker 
+```
+# Build the image (run this from the N8N-Genie directory)
+docker build -t n8n-genie .
+
+# Run the container (the .env file is now copied into the image)
+docker run -d \
+  --name n8n-genie-app \
+  -p 1234:1234 \
+  n8n-genie
+```
 ## N8N Installation
 
 > ⚠️ **IMPORTANT WARNING**: Before proceeding with any installation method, **BACKUP YOUR EXISTING N8N DATA** to prevent any potential data loss during the plugin installation process. This includes workflows, credentials, and any custom configurations.
