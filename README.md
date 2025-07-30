@@ -94,28 +94,46 @@ Use this method if you're setting up n8n for the first time or want a clean inst
 3. **Modify the Dockerfile**
    
    Add the following lines to the `docker/images/n8n/Dockerfile` after the existing WORKDIR and COPY commands:
+
+   Lookup the line `WORKDIR /home/node` and copy the following after this line
    
    ```dockerfile
-   WORKDIR /home/node
-   COPY --from=builder /compiled /usr/local/lib/node_modules/n8n
-
-   COPY docker/images/n8n/plugin.js /usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/dist/assets/plugin.js
-   COPY docker/images/n8n/apply_plugin.js .
-   RUN node apply_plugin.js
-   
-   COPY docker/images/n8n/docker-entrypoint.sh /
+    # Start with the official N8N image
+    FROM docker.n8n.io/n8nio/n8n:latest
+    
+    # Switch to root to modify files
+    USER root
+    
+    # Copy your custom files
+    COPY docker/images/n8n/plugin.js /usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/dist/assets/plugin.js
+    COPY docker/images/n8n/apply_plugin.js /home/node/apply_plugin.js
+    
+    # Run your plugin script
+    WORKDIR /home/node
+    RUN node apply_plugin.js
+    
+    # Change port to 5678 (optional)
+    ENV N8N_PORT=5679=8
+    EXPOSE 5678
+    
+    # Switch back to node user
+    USER node
+    
+    # Use the same entrypoint as the official image
+    ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
    ```
-
-4. **Build the Docker image**
-   ```bash
-   # From the n8n repository root
-   docker build -t n8n-genie -f docker/images/n8n/Dockerfile .
-   ```
+4. **Build Custom N8N image**
+  ```bash
+  docker build -t sc-n8n-custom .
+  ```
 
 5. **Run the enhanced n8n instance**
    ```bash
-   docker run -it --rm -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8n-genie
+   docker volume create n8n_genie_data
+   docker run -d --name sc-n8n -p 5678:5678 -v n8n_genie_data:/home/node/.n8n sc-n8n-custom
+
    ```
+
 ### Option 2: Existing N8N Instance Modification
 
 Use this method if you already have a running n8n instance and want to add the N8N Genie plugin functionality.
@@ -165,24 +183,15 @@ Use this method if you already have a running n8n instance and want to add the N
    # Copy plugin files to current directory first
    cp ~/N8N-Genie/n8n-genie-js/plugin.js .
    cp ~/N8N-Genie/n8n-genie-js/apply_plugin.js .
-   
-   # Build the modified image
-   docker build -t n8n-genie .
    ```
 
 6. **Run the modified n8n instance with data persistence**
    ```bash
    # Using volume mount (recommended)
-   docker run -d --name n8n-genie \
+   docker run -d --name sc-n8n \
      -p 5678:5678 \
      -v ~/.n8n:/home/node/.n8n \
-     n8n-genie
-   
-   # Or using named volume
-   docker run -d --name n8n-genie \
-     -p 5678:5678 \
-     -v n8n_data:/home/node/.n8n \
-     n8n-genie
+     docker.n8n.io/n8nio/n8n
    ```
 ### Verification and Rollback
 
@@ -195,7 +204,7 @@ After installation, verify the plugin is working correctly:
 **If something goes wrong:**
 ```bash
 # For Docker installations
-docker stop n8n-genie
+docker stop sc-n8n
 docker run -d --name n8n-original -p 5678:5678 -v ~/.n8n:/home/node/.n8n n8nio/n8n:latest
 ```
 
