@@ -1,0 +1,21 @@
+# Start with the official N8N image
+FROM docker.n8n.io/n8nio/n8n:latest
+ 
+# Switch to root to modify files
+USER root
+
+# Copy plugin files
+COPY n8n-genie-js/plugin.js /usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/dist/assets/plugin.js
+COPY n8n-genie-js/apply_plugin.js /home/node/apply_plugin.js
+
+# Run your plugin script
+WORKDIR /home/node
+RUN node apply_plugin.js
+
+RUN chmod -R 777 /home/node/.n8n
+
+# Expose the n8n port
+EXPOSE 5678
+
+# Switch back to node user
+USER node

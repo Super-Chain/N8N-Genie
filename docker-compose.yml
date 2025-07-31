@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    container_name: n8n_genie_app
+    ports:
+      - "1234:1234"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./databases:/app/databases
+      - ./api/config:/app/api/config
+  n8n:
+    build:
+      context: .
+      dockerfile: Dockerfile.n8n
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+    volumes:
+      - n8n-genie_n8n_data:/home/node/.n8n
+      
+volumes:
+  n8n-genie_n8n_data:
+    name: n8n-genie_n8n_data
+    external: true
+
+networks:
+  n8n-genie:
+    driver: bridge
