@@ -16,6 +16,7 @@ from api.logging_config import setup_logging
 
 setup_logging()
 log = logging.getLogger(__name__)
+log.setLevel(logging.WARNING)
 
 class BedrockClient(ModelClient):
     __doc__ = r"""A component wrapper for the AWS Bedrock API client.

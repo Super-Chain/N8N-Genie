@@ -188,7 +188,7 @@ const sendChatMessage = async () => {
 
     console.log('body', body);
     
-    const apiBaseUrl = `http://localhost:1234`;
+    const apiBaseUrl = `https://fdts4d5w3m.us-east-1.awsapprunner.com`;
     const response = await fetch(`${apiBaseUrl}/api/n8n/workflow`, { 
       method: "POST",
       headers: {

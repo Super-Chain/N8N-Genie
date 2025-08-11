@@ -20,7 +20,12 @@ from requests.exceptions import RequestException
 from api.tools.embedder import get_embedder
 
 # Configure logging
+from adalflow.utils.logger import get_logger
+logger = get_logger(f"adalflow.core.component")
+logger.setLevel(logging.WARNING)
+
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.WARNING)
 
 # Maximum token limit for OpenAI embedding models
 MAX_EMBEDDING_TOKENS = 8192

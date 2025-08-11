@@ -15,6 +15,7 @@ from adalflow.core.types import (
 )
 
 log = logging.getLogger(__name__)
+log.setLevel(logging.WARNING)
 
 class OpenRouterClient(ModelClient):
     __doc__ = r"""A component wrapper for the OpenRouter API client.

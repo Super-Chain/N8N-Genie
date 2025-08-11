@@ -36,10 +36,14 @@ function addLineToFile(filePath, newLine) {
 	}
 }
 
+// Add plugin script to HTML
 addLineToFile(
     '/usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/dist/index.html', 
     '	<script type="module" crossorigin src="/{{BASE_PATH}}/assets/plugin.js"></script>'
 );
+
+
+
 
 
 

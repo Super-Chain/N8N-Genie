@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "N8N Genie - AI Workflow Assistant",
+  "version": "1.0.0",
+  "description": "An AI-powered assistant that helps you create, debug, and optimize your N8N workflows with intelligent suggestions and code generation.",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:*/*",
+    "https://localhost:*/*",
+    "*://*.n8n.cloud/*",
+    "*://*.n8n.io/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/workflow/*",
+        "*://*/workflows/*",
+        "*://localhost:*/*",
+        "*://127.0.0.1:*/*",
+        "*://*.n8n.cloud/*",
+        "*://*.n8n.io/*"
+      ],
+      "js": ["plugin.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "N8N Genie Settings"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["plugin.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

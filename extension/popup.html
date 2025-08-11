@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 300px;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+        .subtitle {
+            font-size: 12px;
+            color: #666;
+            margin: 5px 0 0 0;
+        }
+        .status {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #e9ecef;
+        }
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-dot.active {
+            background: #28a745;
+            box-shadow: 0 0 8px rgba(40, 167, 69, 0.4);
+        }
+        .status-dot.inactive {
+            background: #6c757d;
+        }
+        .status-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .status-desc {
+            font-size: 12px;
+            color: #666;
+            margin-left: 16px;
+        }
+        .settings {
+            margin-top: 15px;
+        }
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .setting-label {
+            color: #333;
+        }
+        .setting-value {
+            color: #666;
+            font-family: monospace;
+            font-size: 11px;
+        }
+        .instructions {
+            font-size: 12px;
+            color: #666;
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #007acc;
+        }
+        .instructions strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">🧞‍♂️</div>
+        <h3 class="title">N8N Genie</h3>
+        <p class="subtitle">AI Workflow Assistant</p>
+    </div>
+
+    <div class="status">
+        <div class="status-indicator">
+            <div class="status-dot active" id="statusDot"></div>
+            <span class="status-text" id="statusText">Extension Active</span>
+        </div>
+        <div class="status-desc" id="statusDesc">
+            The AI assistant will appear on N8N workflow pages automatically.
+        </div>
+    </div>
+
+    <div class="settings">
+        <div class="setting-item">
+            <span class="setting-label">API Server:</span>
+            <span class="setting-value" id="apiServer">localhost:8001</span>
+        </div>
+        <div class="setting-item">
+            <span class="setting-label">Version:</span>
+            <span class="setting-value">1.0.0</span>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <strong>How to use:</strong><br>
+        1. Go to any N8N workflow page<br>
+        2. Look for the chat toggle on the right side<br>
+        3. Click to open the AI assistant<br>
+        4. Start chatting about your workflows!
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

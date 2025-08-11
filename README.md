@@ -209,6 +209,23 @@ Modify the existing workflow by replaing the AI model from openAI to gemini
 ```
 - **Review**: The N8N Genie will generate a separate workflow. Cick the button "Copy Button" to copy the workflow JSON, then paste it on the n8n canvas to import and use the created workflow
 
+## Try it out
+
+Experience N8N-Genie in action without any setup required! Visit our live demo:
+
+**🚀 Live Demo**: [https://superchaintech-n8n-ai-genie.hf.space](https://superchaintech-n8n-ai-genie.hf.space)
+
+This hosted version allows you to explore all the features of N8N-Genie in a fully functional environment. Get started in seconds:
+
+### Quick Start Guide:
+1. **Navigate to the signup page** - Click the 'New Account' button to redirect to signup page
+2. **Fill in your details** - Provide your first name, last name, email, and password
+3. **Create account** - Click the finish button to create your new account
+4. **Start building** - Once logged in, create your first AI-powered workflow or modify existing ones
+
+![Signin Page](.github/signin_page.png)
+![Signup Page](.github/signup_page.png)
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Super-Chain/N8N-Genie&type=Date)](https://www.star-history.com/#Super-Chain/N8N-Genie&Date)

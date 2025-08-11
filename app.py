@@ -20,11 +20,7 @@ from api.openrouter_client import OpenRouterClient
 from api.rag import RAG
 
 from prompt import get_create_prompt, get_debug_prompt, get_planner_prompt
-from utils import clear_workflow
-
-import logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('FastAPI')
+from utils import logger, clear_workflow, check_and_store_api_call
 
 app = FastAPI(openapi_url=None)
 
@@ -36,6 +32,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 class ChatMessage(BaseModel):
     role: str  # 'user' or 'assistant'
     content: str
@@ -45,6 +42,7 @@ class ChatCompletionRequest(BaseModel):
     credentials: list
     workflow_data: str
     user: str
+
 
 async def get_llm_response(prompt, provider, model_id):
     model = OpenRouterClient() 
@@ -77,6 +75,15 @@ async def chat_completions_stream(request: ChatCompletionRequest):
     logger.info(f"Received: {request.model_dump()}")
     credentials = request.credentials
     workflow_data = request.workflow_data
+    user = json.loads(request.user)
+    
+    # Check API call limit for the user
+    if 'email' not in user:
+        raise HTTPException(status_code=429, detail="No email is provided!")
+
+    if not check_and_store_api_call(user['email']):
+        raise HTTPException(status_code=429, detail="Daily API call limit exceeded (5 per day). Please try again tomorrow.")
+
     filePath = None
     token = None
     type = "github"

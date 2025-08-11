@@ -51,8 +51,9 @@ from adalflow.core.types import (
 from adalflow.components.model_client.utils import parse_embedding_response
 
 log = logging.getLogger(__name__)
-T = TypeVar("T")
+log.setLevel(logging.WARNING)
 
+T = TypeVar("T")
 
 # completion parsing functions and you can combine them into one singple chat completion parser
 def get_first_message_content(completion: ChatCompletion) -> str:
@@ -412,7 +413,7 @@ class OpenAIClient(ModelClient):
         """
         kwargs is the combined input and model_kwargs.  Support streaming call.
         """
-        log.info(f"api_kwargs: {api_kwargs}")
+        # log.info(f"api_kwargs: {api_kwargs}")
         self._api_kwargs = api_kwargs
         if model_type == ModelType.EMBEDDER:
             return self.sync_client.embeddings.create(**api_kwargs)
