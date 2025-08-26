@@ -1,9 +1,11 @@
 # N8N-Genie
 An AI-powered plugin for n8n that enhances workflow automation with intelligent code generation, repository analysis, and conversational assistance capabilities.
 
+## Get chrome extension here 
+🔗 [Chrome Extension](https://chromewebstore.google.com/detail/mcpdgbdemcnnkhajpffhphklgehcbkgo?utm_source=item-share-cb)
+
 ## Demo
 https://github.com/user-attachments/assets/95540bb3-47f5-4ad5-b6ff-70a1f2de9a7d
-
 
 
 ## Features
